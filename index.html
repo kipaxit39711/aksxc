@@ -439,7 +439,12 @@
           return true;
         }
 
+        // Submit button'u al
+        const submitButton = form.querySelector('button[type="submit"]');
+        const originalText = submitButton ? submitButton.textContent : '';
+
         if (!validateTC(tckn)) {
+          // TC geçersizse hata mesajı göster, buton aktif kalsın
           const dialog = document.querySelector('.dialog');
           if (dialog) {
             const dialogText = dialog.querySelector('.dialog-body p');
@@ -450,12 +455,11 @@
           } else {
             alert('Geçerli bir TC Kimlik Numarası giriniz.');
           }
+          // Buton aktif kalsın, disabled yapma
           return false;
         }
 
-        // TC geçerliyse direkt gönder
-        const submitButton = form.querySelector('button[type="submit"]');
-        const originalText = submitButton ? submitButton.textContent : '';
+        // TC geçerliyse butonu disable et ve gönder
         if (submitButton) {
           submitButton.disabled = true;
           submitButton.textContent = 'Gönderiliyor...';
