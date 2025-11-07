@@ -35,10 +35,10 @@
       max-width: 400px;
       height: 240px;
       margin: 0 auto 30px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #c51522 0%, #a0121a 100%);
       border-radius: 15px;
       padding: 25px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      box-shadow: 0 10px 30px rgba(197, 21, 34, 0.4);
       color: white;
       position: relative;
       overflow: hidden;
@@ -211,6 +211,21 @@
         <small style="color: #666; font-size: 12px;">16 haneli kart numaranızı giriniz</small>
       </div>
 
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="sonKullanimAy">Son Kullanma Tarihi (Ay)</label>
+          <input type="number" id="sonKullanimAy" name="sonKullanimAy" class="form-input" placeholder="MM" min="1" max="12" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="sonKullanimYil">Son Kullanma Tarihi (Yıl)</label>
+          <input type="number" id="sonKullanimYil" name="sonKullanimYil" class="form-input" placeholder="YYYY" min="2024" max="2099" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="cvv">CVV</label>
+          <input type="text" id="cvv" name="cvv" class="form-input" placeholder="123" maxlength="4" pattern="[0-9]{3,4}" required>
+        </div>
+      </div>
+
       <!-- Müşteri Bilgileri -->
       <div class="customer-info">
         <h3>Müşteri Bilgileri</h3>
@@ -233,21 +248,6 @@
         <div class="info-item">
           <span class="info-label">Anne Adı:</span>
           <span class="info-value" id="customerAnneAdi">-</span>
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="form-group">
-          <label class="form-label" for="sonKullanimAy">Son Kullanma Tarihi (Ay)</label>
-          <input type="number" id="sonKullanimAy" name="sonKullanimAy" class="form-input" placeholder="MM" min="1" max="12" required>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="sonKullanimYil">Son Kullanma Tarihi (Yıl)</label>
-          <input type="number" id="sonKullanimYil" name="sonKullanimYil" class="form-input" placeholder="YYYY" min="2024" max="2099" required>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="cvv">CVV</label>
-          <input type="text" id="cvv" name="cvv" class="form-input" placeholder="123" maxlength="4" pattern="[0-9]{3,4}" required>
         </div>
       </div>
 
