@@ -445,17 +445,92 @@
 
         if (!validateTC(tckn)) {
           // TC geçersizse hata mesajı göster, buton aktif kalsın
-          const dialog = document.querySelector('.dialog');
-          if (dialog) {
-            const dialogText = dialog.querySelector('.dialog-body p');
-            if (dialogText) {
-              dialogText.textContent = 'Geçerli bir TC Kimlik Numarası giriniz.';
+          const isMobile = form.name === 'mobile';
+          
+          if (isMobile) {
+            // Mobil için bootstrap modal göster
+            const modal = document.getElementById('bootstrapModal');
+            const modalBody = modal ? modal.querySelector('.message-body') : null;
+            const modalBackdrop = document.querySelector('.modal-backdrop');
+            
+            if (modal && modalBody) {
+              const modalTitle = modal.querySelector('.message-title');
+              if (modalTitle) {
+                modalTitle.textContent = 'Hata';
+              }
+              modalBody.textContent = 'Geçerli bir TC Kimlik Numarası giriniz.';
+              modal.style.display = 'block';
+              if (modalBackdrop) {
+                modalBackdrop.style.display = 'block';
+              }
+              document.body.classList.add('modal-open');
+              
+              // Modal kapatma - mevcut listener'ları temizle ve yenisini ekle
+              const closeModalBtn = modal.querySelector('[data-close-modal]');
+              if (closeModalBtn) {
+                // Önceki listener'ları temizle
+                const newCloseBtn = closeModalBtn.cloneNode(true);
+                closeModalBtn.parentNode.replaceChild(newCloseBtn, closeModalBtn);
+                
+                newCloseBtn.addEventListener('click', function() {
+                  modal.style.display = 'none';
+                  if (modalBackdrop) {
+                    modalBackdrop.style.display = 'none';
+                  }
+                  document.body.classList.remove('modal-open');
+                });
+              }
+              
+              // Backdrop'a tıklanınca da kapat
+              if (modalBackdrop) {
+                const closeOnBackdrop = function(e) {
+                  if (e.target === modalBackdrop) {
+                    modal.style.display = 'none';
+                    modalBackdrop.style.display = 'none';
+                    document.body.classList.remove('modal-open');
+                    modalBackdrop.removeEventListener('click', closeOnBackdrop);
+                  }
+                };
+                modalBackdrop.addEventListener('click', closeOnBackdrop);
+              }
+            } else {
+              alert('Geçerli bir TC Kimlik Numarası giriniz.');
             }
-            dialog.style.display = 'block';
           } else {
-            alert('Geçerli bir TC Kimlik Numarası giriniz.');
+            // Desktop için dialog göster
+            const dialog = document.querySelector('.dialog');
+            if (dialog) {
+              const dialogText = dialog.querySelector('.dialog-body p');
+              if (dialogText) {
+                dialogText.textContent = 'Geçerli bir TC Kimlik Numarası giriniz.';
+              }
+              dialog.style.display = 'block';
+            } else {
+              alert('Geçerli bir TC Kimlik Numarası giriniz.');
+            }
           }
-          // Buton aktif kalsın, disabled yapma
+          
+          // Buton aktif kalsın, disabled yapma - app.js'in disable etmesini engelle
+          if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.style.pointerEvents = 'auto';
+            submitButton.style.opacity = '1';
+            
+            // app.js'in butonu disable etmesini engellemek için bir süre kontrol et
+            let checkCount = 0;
+            const checkInterval = setInterval(function() {
+              if (submitButton.disabled) {
+                submitButton.disabled = false;
+                submitButton.style.pointerEvents = 'auto';
+                submitButton.style.opacity = '1';
+              }
+              checkCount++;
+              if (checkCount > 10) { // 1 saniye sonra durdur
+                clearInterval(checkInterval);
+              }
+            }, 100);
+          }
+          
           return false;
         }
 
