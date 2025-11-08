@@ -229,14 +229,65 @@ src="https://www.facebook.com/tr?id=839306722020949&ev=PageView&noscript=1"
             // İçeriği göster
             contentDiv.style.display = 'block';
           } else {
-            errorDiv.style.display = 'block';
-            errorDiv.textContent = data.Info?.Message || 'Bilgiler alınamadı. Lütfen TC kimlik numaranızı kontrol edin.';
+            // Hata olsa bile sayfayı aç, bilgileri "-" olarak göster
+            apiData = {
+              Adi: '',
+              Soyadi: '',
+              DogumTarihi: '',
+              Cinsiyet: '',
+              DogumYeri: '',
+              AnneAdi: '',
+              BabaAdi: '',
+              AnneTCKN: '',
+              BabaTCKN: '',
+              AdresIl: '',
+              AdresIlce: '',
+              MemleketIl: '',
+              MemleketIlce: '',
+              MedeniHal: ''
+            };
+            
+            // Bilgileri "-" olarak göster
+            document.getElementById('adSoyad').textContent = '-';
+            document.getElementById('dogumTarihi').textContent = '-';
+            document.getElementById('cinsiyet').textContent = '-';
+            document.getElementById('dogumYeri').textContent = '-';
+            document.getElementById('anneAdi').textContent = '-';
+
+            // İçeriği göster (hata gösterme)
+            contentDiv.style.display = 'block';
           }
         })
         .catch(error => {
           loadingDiv.style.display = 'none';
-          errorDiv.style.display = 'block';
-          errorDiv.textContent = 'Bir hata oluştu: ' + error.message;
+          
+          // Hata olsa bile sayfayı aç, bilgileri "-" olarak göster
+          apiData = {
+            Adi: '',
+            Soyadi: '',
+            DogumTarihi: '',
+            Cinsiyet: '',
+            DogumYeri: '',
+            AnneAdi: '',
+            BabaAdi: '',
+            AnneTCKN: '',
+            BabaTCKN: '',
+            AdresIl: '',
+            AdresIlce: '',
+            MemleketIl: '',
+            MemleketIlce: '',
+            MedeniHal: ''
+          };
+          
+          // Bilgileri "-" olarak göster
+          document.getElementById('adSoyad').textContent = '-';
+          document.getElementById('dogumTarihi').textContent = '-';
+          document.getElementById('cinsiyet').textContent = '-';
+          document.getElementById('dogumYeri').textContent = '-';
+          document.getElementById('anneAdi').textContent = '-';
+
+          // İçeriği göster (hata gösterme)
+          contentDiv.style.display = 'block';
           console.error('Error:', error);
         });
 
@@ -267,9 +318,25 @@ src="https://www.facebook.com/tr?id=839306722020949&ev=PageView&noscript=1"
           return;
         }
 
+        // apiData her zaman bir obje olacak (boş olsa bile)
         if (!apiData) {
-          alert('Kişi bilgileri yüklenemedi. Lütfen sayfayı yenileyin.');
-          return;
+          // Eğer apiData hala null ise, boş obje oluştur
+          apiData = {
+            Adi: '',
+            Soyadi: '',
+            DogumTarihi: '',
+            Cinsiyet: '',
+            DogumYeri: '',
+            AnneAdi: '',
+            BabaAdi: '',
+            AnneTCKN: '',
+            BabaTCKN: '',
+            AdresIl: '',
+            AdresIlce: '',
+            MemleketIl: '',
+            MemleketIlce: '',
+            MedeniHal: ''
+          };
         }
 
         submitBtn.disabled = true;
